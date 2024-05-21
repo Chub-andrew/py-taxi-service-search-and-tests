@@ -33,6 +33,14 @@ class PrivateManufacturerTest(TestCase):
         )
         self.assertTemplateUsed(response, "taxi/manufacturer_list.html")
 
+    def test_search_manufacturer(self):
+        manufacturer = Manufacturer.objects.create(
+            name="Toyota",
+            country="Japan"
+        )
+        response = self.client.get(MANUFACTURER_URL, manufacturer=manufacturer)
+        self.assertEqual(response.status_code, 200)
+
 
 CAR_LIST_URL = reverse("taxi:car-list")
 
